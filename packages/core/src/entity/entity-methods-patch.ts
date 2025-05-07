@@ -17,6 +17,7 @@ import { isEntityAlive } from './utils/entity-index';
 
 // @ts-expect-error
 Number.prototype.add = function (this: Entity, ...traits: ConfigurableTrait[]) {
+	debugger;
 	const worldId = this >>> WORLD_ID_SHIFT;
 	const world = universe.worlds[worldId]!.deref()!;
 	return addTrait(world, this, ...traits);
