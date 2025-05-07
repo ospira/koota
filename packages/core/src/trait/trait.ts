@@ -62,7 +62,8 @@ export function registerTrait(world: World, trait: Trait) {
 	// Increment the world bitflag.
 	incrementWorldBitflag(world);
 }
-
+// need to spend more time w this func
+/// (and this file)
 export function addTrait(world: World, entity: Entity, ...traits: ConfigurableTrait[]) {
 	const ctx = world[$internal];
 
@@ -239,8 +240,14 @@ export function hasTrait(world: World, entity: Entity, trait: Trait): boolean {
 export function getStore<C extends Trait = Trait>(world: World, trait: C): ExtractStore<C> {
 	const ctx = world[$internal];
 	const data = ctx.traitData.get(trait)!;
-	const store = data.store as ExtractStore<C>;
-
+	let store;
+	try {
+		store = data.store as ExtractStore<C>;
+	} catch (e) {
+		console.log({ e });
+		debugger;
+	}
+	//@ts-ignore
 	return store;
 }
 

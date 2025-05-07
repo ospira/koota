@@ -13,7 +13,8 @@ import './entity-methods-patch';
 export function createEntity(world: World, ...traits: ConfigurableTrait[]): Entity {
 	const ctx = world[$internal];
 	const entity = allocateEntity(ctx.entityIndex);
-
+	// don't yet understand why this line is specific to
+	/// ctx.notQueries
 	for (const query of ctx.notQueries) {
 		const match = query.check(world, entity);
 		if (match) query.add(entity);
